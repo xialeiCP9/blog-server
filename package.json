@@ -1,0 +1,19 @@
+{
+  "name": "blog-server",
+  "version": "1.0.0",
+  "description": "个人博客网站后端",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xialeiCP9/blog-server.git"
+  },
+  "author": "xialei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xialeiCP9/blog-server/issues"
+  },
+  "homepage": "https://github.com/xialeiCP9/blog-server#readme"
+}
