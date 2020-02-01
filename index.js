@@ -19,6 +19,6 @@ app.use(bodyParser.json())
 
 adminRouter(app)
 
-app.use(express.static(path.join(__dirname ,'upload')))
+app.use(express.static(path.join(__dirname ,'uploads')))
 
 app.listen(3000)

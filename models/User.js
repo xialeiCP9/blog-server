@@ -6,7 +6,7 @@ const userSchema = new Schema({
   'phone': String,
   'pwd': String,
   'nickname': String,
-  'avatar': String,
+  'avatar': {type: String, default: 'http://localhost:3000/avatar-default.jpg'},
   'type': String
 }, {
   versionKey: false
