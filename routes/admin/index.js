@@ -47,14 +47,36 @@ module.exports = (app) => {
   const fs = require('fs')
   const mime = require('mime')
   const upload = multer({dest: __dirname + '/../../uploads'})
-  app.post('/admin/api/upload',upload.single('file'), (req, res) => {
+  const gm = require('gm')
+  app.post('/admin/api/upload',upload.single('file'), async (req, res) => {
     const file = req.file
     const extention = mime.getExtension(file.mimetype)
-    fs.rename(file.path, file.path + '.' + extention, (err) => {
-      if(err)
+    await fs.rename(file.path, file.path + '.' + extention, (err) => {
+      if (err) {
         console.log(err)
-      file.url = 'http://localhost:3000/' + file.filename + '.' + extention
-      res.send(req.file)
+      }
+    })
+    file.url = 'http://localhost:3000/' + file.filename + '.' + extention
+    file.filename = file.filename + '.' + extention
+    file.path = file.path + '.' + extention
+    gm(file.path).size((err, size) => {
+      if (err) {
+        console.log(err)
+        res.send('err')
+      }
+      file.size = size
+      res.send(file)
+    })
+  })
+  //剪切图片
+  app.post('/admin/api/cut', async (req, res) => {
+    const {w, h, x, y, file} = req.body
+    gm(file.path).crop(w, h, x, y).write(file.path, (err) => {
+      if (err) {
+        console.log(err)
+        res.status(500)
+      }
+      res.send(file.url)
     })
   })
 }
