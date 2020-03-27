@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 const adminRouter = require('./routes/admin')
 
 const app = express()
+// 增加全局变量，用于设置token
+app.set('secret', 'xialei')
 /**
 * 连接数据库
 **/
